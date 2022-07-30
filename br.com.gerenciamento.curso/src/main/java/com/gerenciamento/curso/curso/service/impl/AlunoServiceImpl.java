@@ -60,4 +60,8 @@ public class AlunoServiceImpl implements AlunoService {
         }
     }
 
+    public Aluno buscarAlunoPorID(Integer id) {
+        return alunoRepository.findById(id)
+                .orElseThrow(( )-> new ExceptionPersonalizada("mensagem", "Aluno não cadastrado."));
+    }
 }

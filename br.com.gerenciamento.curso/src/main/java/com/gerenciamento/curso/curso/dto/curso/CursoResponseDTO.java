@@ -1,5 +1,6 @@
-package com.gerenciamento.curso.curso.model;
+package com.gerenciamento.curso.curso.dto.curso;
 
+import com.gerenciamento.curso.curso.model.Aluno;
 import com.gerenciamento.curso.curso.model.enums.Processo;
 
 import javax.persistence.*;
@@ -7,30 +8,20 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Entity
-public class Curso {
+public class CursoResponseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty(message = "O nome do curso não pode ser nulo ou vazio.")
     private String nomeCurso;
 
-    @NotNull(message = "A carga horaria do curso não pode ser nulo ou vazia.")
     private Integer cargaHoraria;
 
-    @NotNull(message = "A data de inicio do curso não pode ser nulo ou vazio.")
     private LocalDate dataInicio;
 
     private LocalDate previsaoConclusao;
 
-    @Enumerated(EnumType.STRING)
     private Processo processo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_aluno")
-    @NotNull(message = "O id do aluno não pode ser nulo.")
     private Aluno aluno;
 
     public Integer getId() {
