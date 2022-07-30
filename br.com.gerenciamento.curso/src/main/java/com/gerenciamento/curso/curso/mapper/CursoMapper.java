@@ -1,5 +1,6 @@
 package com.gerenciamento.curso.curso.mapper;
 
+import com.gerenciamento.curso.curso.dto.curso.CursoAtualizarDTO;
 import com.gerenciamento.curso.curso.dto.curso.CursoBuscarDTO;
 import com.gerenciamento.curso.curso.dto.curso.CursoRequestDTO;
 import com.gerenciamento.curso.curso.dto.curso.CursoResponseDTO;
@@ -19,6 +20,9 @@ public interface CursoMapper {
     @Mapping(target = "aluno.nome", source = "nomeAluno")
     @Mapping(target = "id", source = "id_curso")
     Curso toCurso(CursoBuscarDTO dto);
+
+
+    Curso toCurso(CursoAtualizarDTO dto);
 
     CursoResponseDTO toCursoResponseDTO(Curso curso);
 }

@@ -7,6 +7,7 @@ import com.gerenciamento.curso.curso.model.Curso;
 import com.gerenciamento.curso.curso.model.enums.Processo;
 import com.gerenciamento.curso.curso.repository.CursoRepository;
 import com.gerenciamento.curso.curso.service.CursoSevice;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -73,6 +74,30 @@ public class CursoServiceImpl implements CursoSevice {
     public void deletarCursoPorId(Integer id) {
         validarCurso(id);
         cursoRepository.deleteById(id);
+    }
+
+    @Override
+    public Curso atualizarCurso(Curso curso, Integer dias) {
+        validarCurso(curso.getId());
+        Curso cursoAtualizado = cursoRepository.getById(curso.getId());
+        if (StringUtils.isNotBlank(curso.getNomeCurso())) {
+            cursoAtualizado.setNomeCurso(curso.getNomeCurso());
+        }
+        if (curso.getCargaHoraria() != null) {
+            cursoAtualizado.setCargaHoraria(curso.getCargaHoraria());
+        }
+        if (dias != null) {
+            cursoAtualizado.setPrevisaoConclusao(LocalDate.now().plusDays(dias));
+            int x = cursoAtualizado.getPrevisaoConclusao().compareTo(LocalDate.now());
+            if (!cursoAtualizado.getProcesso().equals(Processo.CONCLUIDO)) {
+                if (x >= 0) {
+                    cursoAtualizado.setProcesso(Processo.ANDAMENTO);
+                } else {
+                    cursoAtualizado.setProcesso(Processo.ATRASADO);
+                }
+            }
+        }
+        return cursoRepository.save(cursoAtualizado);
     }
 
     private void validarCurso(Integer id_curso) {
