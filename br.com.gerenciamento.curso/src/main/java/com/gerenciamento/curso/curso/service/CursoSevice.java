@@ -14,5 +14,7 @@ public interface CursoSevice {
 
     void deletarCursoPorId(Integer id);
 
+    void deletarTodosCursoAluno(Integer id_aluno);
+
     Curso atualizarCurso(Curso curso, Integer dias);
 }

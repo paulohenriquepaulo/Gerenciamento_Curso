@@ -57,4 +57,10 @@ public class CursoController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/todos/{id}")
+    public ResponseEntity deletarTodosCurso(@PathVariable Integer id) {
+        cursoService.deletarTodosCursoAluno(id);
+        return ResponseEntity.notFound().build();
+    }
+
 }
