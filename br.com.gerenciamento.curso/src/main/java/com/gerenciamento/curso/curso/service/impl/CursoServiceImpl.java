@@ -69,6 +69,12 @@ public class CursoServiceImpl implements CursoSevice {
         return cursoList;
     }
 
+    @Override
+    public void deletarCursoPorId(Integer id) {
+        validarCurso(id);
+        cursoRepository.deleteById(id);
+    }
+
     private void validarCurso(Integer id_curso) {
         if (id_curso != null) {
             cursoRepository.findById(id_curso)

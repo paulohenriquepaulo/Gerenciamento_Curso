@@ -11,4 +11,6 @@ public interface CursoSevice {
     void concluirCursoPorId(Integer id_curso);
 
     List<Curso> buscarCurso(Curso curso);
+
+    void deletarCursoPorId(Integer id);
 }

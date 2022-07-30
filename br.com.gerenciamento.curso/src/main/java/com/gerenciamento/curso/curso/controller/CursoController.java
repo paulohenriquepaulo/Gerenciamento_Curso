@@ -40,4 +40,11 @@ public class CursoController {
         List<Curso> cursos =  cursoService.buscarCurso(cursoMapper.toCurso(cursoBuscarDTO));
         return ResponseEntity.ok(cursos);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarCurso(@PathVariable Integer id) {
+        cursoService.deletarCursoPorId(id);
+        return ResponseEntity.notFound().build();
+    }
+
 }
