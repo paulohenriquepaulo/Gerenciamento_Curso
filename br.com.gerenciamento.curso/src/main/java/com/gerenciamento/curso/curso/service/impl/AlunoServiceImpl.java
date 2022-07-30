@@ -1,6 +1,7 @@
 package com.gerenciamento.curso.curso.service.impl;
 
 import com.gerenciamento.curso.curso.exeption.ExceptionPersonalizada;
+import com.gerenciamento.curso.curso.mapper.AlunoMapper;
 import com.gerenciamento.curso.curso.model.Aluno;
 import com.gerenciamento.curso.curso.repository.AlunoRepository;
 import com.gerenciamento.curso.curso.service.AlunoService;
@@ -16,6 +17,9 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
+
+    @Autowired
+    private AlunoMapper alunoMapper;
 
     @Override
     public Aluno cadastrarAluno(Aluno aluno) {
@@ -35,6 +39,19 @@ public class AlunoServiceImpl implements AlunoService {
         return alunoList;
     }
 
+    @Override
+    public void deletarAlunoPoID(Integer id) {
+        validarID(id);
+        alunoRepository.deleteById(id);
+    }
+
+    @Override
+    public Aluno atualizarAluno(Aluno aluno) {
+        validarID(aluno.getId());
+        alunoMapper.toAluno(aluno);
+        return alunoRepository.save(alunoMapper.toAluno(aluno));
+    }
+
     private void validarID(Integer id) {
         if (id != null) {
             if (!alunoRepository.existsById(id)) {
@@ -42,4 +59,5 @@ public class AlunoServiceImpl implements AlunoService {
             }
         }
     }
+
 }
