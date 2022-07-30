@@ -1,5 +1,6 @@
 package com.gerenciamento.curso.curso.controller;
 
+import com.gerenciamento.curso.curso.dto.aluno.AlunoAtualizarDTO;
 import com.gerenciamento.curso.curso.dto.aluno.AlunoBuscarDTO;
 import com.gerenciamento.curso.curso.dto.aluno.AlunoRequestDTO;
 import com.gerenciamento.curso.curso.dto.aluno.AlunoResponseDTO;
@@ -34,6 +35,12 @@ public class AlunoController {
     public ResponseEntity buscarAluno(AlunoBuscarDTO dto) {
         List<Aluno> alunoList = alunoService.buscarAluno(alunoMapper.toAluno(dto));
         return ResponseEntity.ok(alunoList);
+    }
+
+    @PutMapping
+    public ResponseEntity<AlunoResponseDTO> atualizarAluno(@RequestBody @Valid AlunoAtualizarDTO dto ) {
+        Aluno alunoAtualizado  = alunoService.atualizarAluno(alunoMapper.toAluno(dto));
+        return ResponseEntity.ok(alunoMapper.toAlunoResponseDTO(alunoAtualizado));
     }
 
     @DeleteMapping("/{id}")

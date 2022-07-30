@@ -11,5 +11,7 @@ public interface AlunoService {
 
     void deletarAlunoPoID(Integer id);
 
+    Aluno atualizarAluno(Aluno aluno);
+
 
 }
