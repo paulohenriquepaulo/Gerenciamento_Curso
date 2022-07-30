@@ -1,7 +1,5 @@
 package com.gerenciamento.curso.curso.model;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -56,3 +54,4 @@ public class Aluno {
         this.gitHub = gitHub;
     }
 }
+
