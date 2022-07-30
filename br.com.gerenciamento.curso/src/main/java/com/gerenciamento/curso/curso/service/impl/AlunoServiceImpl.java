@@ -4,6 +4,7 @@ import com.gerenciamento.curso.curso.exeption.ExceptionPersonalizada;
 import com.gerenciamento.curso.curso.mapper.AlunoMapper;
 import com.gerenciamento.curso.curso.model.Aluno;
 import com.gerenciamento.curso.curso.repository.AlunoRepository;
+import com.gerenciamento.curso.curso.repository.CursoRepository;
 import com.gerenciamento.curso.curso.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -20,6 +21,9 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Autowired
     private AlunoMapper alunoMapper;
+
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @Override
     public Aluno cadastrarAluno(Aluno aluno) {
@@ -42,6 +46,7 @@ public class AlunoServiceImpl implements AlunoService {
     @Override
     public void deletarAlunoPoID(Integer id) {
         validarID(id);
+        verificarAlunoVinculadoCurso(id);
         alunoRepository.deleteById(id);
     }
 
@@ -62,6 +67,12 @@ public class AlunoServiceImpl implements AlunoService {
 
     public Aluno buscarAlunoPorID(Integer id) {
         return alunoRepository.findById(id)
-                .orElseThrow(( )-> new ExceptionPersonalizada("mensagem", "Aluno não cadastrado."));
+                .orElseThrow(() -> new ExceptionPersonalizada("mensagem", "Aluno não cadastrado."));
+    }
+
+    public void verificarAlunoVinculadoCurso(Integer id_aluno) {
+            if (!cursoRepository.findByIdAluno(id_aluno).isEmpty()) {
+                throw new ExceptionPersonalizada("mensagem", "Este aluno está vinculado a um ou mais cursos.");
+            }
     }
 }
