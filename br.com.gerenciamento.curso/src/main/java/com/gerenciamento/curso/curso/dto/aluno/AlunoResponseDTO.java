@@ -1,17 +1,19 @@
-package com.gerenciamento.curso.curso.dto;
+package com.gerenciamento.curso.curso.dto.aluno;
 
-import javax.validation.constraints.NotEmpty;
+public class AlunoResponseDTO {
 
-public class AlunoRequestDTO {
-
-    @NotEmpty(message = "O nome não pode ser nulo ou vazio.")
+    private Integer id;
     private String nome;
-
-    @NotEmpty(message = "O e-mail não pode ser nulo ou vazio.")
     private String email;
-
-    @NotEmpty(message = "O GitHub não pode ser nulo ou vazio.")
     private String gitHub;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
