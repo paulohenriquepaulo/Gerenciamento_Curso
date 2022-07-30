@@ -1,5 +1,6 @@
 package com.gerenciamento.curso.curso.mapper;
 
+import com.gerenciamento.curso.curso.dto.aluno.AlunoAtualizarDTO;
 import com.gerenciamento.curso.curso.dto.aluno.AlunoBuscarDTO;
 import com.gerenciamento.curso.curso.dto.aluno.AlunoRequestDTO;
 import com.gerenciamento.curso.curso.dto.aluno.AlunoResponseDTO;
@@ -12,6 +13,10 @@ public interface AlunoMapper {
     Aluno toAluno(AlunoRequestDTO dto);
 
     Aluno toAluno(AlunoBuscarDTO dto);
+
+    Aluno toAluno(AlunoAtualizarDTO dto);
+
+    Aluno toAluno(Aluno dto);
 
     AlunoResponseDTO toAlunoResponseDTO(Aluno aluno);
 }
