@@ -32,7 +32,7 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public List<Aluno> buscarAluno(Aluno aluno) {
-        validarID(aluno.getId());
+        validarAlunoPorID(aluno.getId());
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
@@ -45,22 +45,22 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public void deletarAlunoPoID(Integer id) {
-        validarID(id);
+        validarAlunoPorID(id);
         verificarAlunoVinculadoCurso(id);
         alunoRepository.deleteById(id);
     }
 
     @Override
     public Aluno atualizarAluno(Aluno aluno) {
-        validarID(aluno.getId());
+        validarAlunoPorID(aluno.getId());
         alunoMapper.toAluno(aluno);
         return alunoRepository.save(alunoMapper.toAluno(aluno));
     }
 
-    private void validarID(Integer id) {
+    public void validarAlunoPorID(Integer id) {
         if (id != null) {
             if (!alunoRepository.existsById(id)) {
-                throw new ExceptionPersonalizada("mensagem", "ID invalido");
+                throw new ExceptionPersonalizada("mensagem", "Aluno não cadastrado");
             }
         }
     }
