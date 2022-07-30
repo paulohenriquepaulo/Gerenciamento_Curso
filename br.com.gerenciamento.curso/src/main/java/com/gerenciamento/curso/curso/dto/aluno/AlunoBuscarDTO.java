@@ -1,11 +1,12 @@
-package com.gerenciamento.curso.curso.dto;
+package com.gerenciamento.curso.curso.dto.aluno;
 
-public class AlunoResponseDTO {
+public class AlunoBuscarDTO {
 
     private Integer id;
+
     private String nome;
+
     private String email;
-    private String gitHub;
 
     public Integer getId() {
         return id;
@@ -29,13 +30,5 @@ public class AlunoResponseDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getGitHub() {
-        return gitHub;
-    }
-
-    public void setGitHub(String gitHub) {
-        this.gitHub = gitHub;
     }
 }
