@@ -13,4 +13,6 @@ public interface CursoSevice {
     List<Curso> buscarCurso(Curso curso);
 
     void deletarCursoPorId(Integer id);
+
+    Curso atualizarCurso(Curso curso, Integer dias);
 }
