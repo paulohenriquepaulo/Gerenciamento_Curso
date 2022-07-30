@@ -1,6 +1,6 @@
 package com.gerenciamento.curso.curso.model;
 
-import com.gerenciamento.curso.curso.model.enus.Processo;
+import com.gerenciamento.curso.curso.model.enums.Processo;
 import lombok.Data;
 
 import javax.persistence.Entity;

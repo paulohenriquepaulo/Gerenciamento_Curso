@@ -1,4 +1,4 @@
-package com.gerenciamento.curso.curso.model.enus;
+package com.gerenciamento.curso.curso.model.enums;
 
 public enum Processo {
 

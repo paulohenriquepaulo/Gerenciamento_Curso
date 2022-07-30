@@ -1,6 +1,6 @@
 package com.gerenciamento.curso.curso.model;
 
-import com.gerenciamento.curso.curso.model.enus.DiaDaSemana;
+import com.gerenciamento.curso.curso.model.enums.DiaDaSemana;
 import lombok.Data;
 
 import javax.persistence.Entity;
