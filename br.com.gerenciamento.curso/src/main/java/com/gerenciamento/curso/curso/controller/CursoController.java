@@ -1,5 +1,6 @@
 package com.gerenciamento.curso.curso.controller;
 
+import com.gerenciamento.curso.curso.dto.curso.CursoBuscarDTO;
 import com.gerenciamento.curso.curso.dto.curso.CursoRequestDTO;
 import com.gerenciamento.curso.curso.dto.curso.CursoResponseDTO;
 import com.gerenciamento.curso.curso.mapper.CursoMapper;
@@ -8,6 +9,8 @@ import com.gerenciamento.curso.curso.service.impl.CursoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/curso")
@@ -30,5 +33,11 @@ public class CursoController {
     public ResponseEntity concluirCurso(@PathVariable Integer id) {
         cursoService.concluirCursoPorId(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity buscarCurso(CursoBuscarDTO cursoBuscarDTO) {
+        List<Curso> cursos =  cursoService.buscarCurso(cursoMapper.toCurso(cursoBuscarDTO));
+        return ResponseEntity.ok(cursos);
     }
 }

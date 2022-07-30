@@ -8,9 +8,12 @@ import com.gerenciamento.curso.curso.model.enums.Processo;
 import com.gerenciamento.curso.curso.repository.CursoRepository;
 import com.gerenciamento.curso.curso.service.CursoSevice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class CursoServiceImpl implements CursoSevice {
@@ -43,8 +46,33 @@ public class CursoServiceImpl implements CursoSevice {
         cursoRepository.save(curso);
     }
 
+    @Override
+    public List<Curso> buscarCurso(Curso curso) {
+        validarCurso(curso.getId());
+        alunoService.validarAlunoPorID(curso.getAluno().getId());
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(
+                        ExampleMatcher.StringMatcher.CONTAINING);
+        Example example = Example.of(curso, matcher);
+        List<Curso> cursoList = cursoRepository.findAll(example);
+        for (int i = 0; i < cursoList.size(); i++) {
+            int x = cursoList.get(i).getPrevisaoConclusao().compareTo(LocalDate.now());
+            if (cursoList.get(i).getProcesso().equals(Processo.CONCLUIDO)) {
+                break;
+            } else if (x < 0) {
+                cursoList.get(i).setProcesso(Processo.ATRASADO);
+                cursoRepository.save(cursoList.get(i));
+            }
+        }
+        return cursoList;
+    }
+
     private void validarCurso(Integer id_curso) {
-        cursoRepository.findById(id_curso)
-                .orElseThrow(() -> new ExceptionPersonalizada("mensagem", "Curso não encontrado."));
+        if (id_curso != null) {
+            cursoRepository.findById(id_curso)
+                    .orElseThrow(() -> new ExceptionPersonalizada("mensagem", "Curso não encontrado."));
+        }
     }
 }
