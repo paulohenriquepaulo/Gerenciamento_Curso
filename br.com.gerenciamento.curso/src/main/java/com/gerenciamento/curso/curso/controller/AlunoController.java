@@ -36,4 +36,10 @@ public class AlunoController {
         return ResponseEntity.ok(alunoList);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarAluno(@PathVariable Integer id) {
+        alunoService.deletarAlunoPoID(id);
+        return ResponseEntity.notFound().build();
+    }
+
 }

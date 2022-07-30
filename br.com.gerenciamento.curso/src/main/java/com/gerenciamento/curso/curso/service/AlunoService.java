@@ -9,5 +9,7 @@ public interface AlunoService {
 
     List<Aluno> buscarAluno(Aluno aluno);
 
+    void deletarAlunoPoID(Integer id);
+
 
 }

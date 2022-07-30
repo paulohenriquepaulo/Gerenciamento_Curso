@@ -35,6 +35,12 @@ public class AlunoServiceImpl implements AlunoService {
         return alunoList;
     }
 
+    @Override
+    public void deletarAlunoPoID(Integer id) {
+        validarID(id);
+        alunoRepository.deleteById(id);
+    }
+
     private void validarID(Integer id) {
         if (id != null) {
             if (!alunoRepository.existsById(id)) {
@@ -42,4 +48,5 @@ public class AlunoServiceImpl implements AlunoService {
             }
         }
     }
+
 }
