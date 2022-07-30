@@ -1,5 +1,6 @@
 package com.gerenciamento.curso.curso.service.impl;
 
+import com.gerenciamento.curso.curso.exeption.ExceptionPersonalizada;
 import com.gerenciamento.curso.curso.mapper.CursoMapper;
 import com.gerenciamento.curso.curso.model.Aluno;
 import com.gerenciamento.curso.curso.model.Curso;
@@ -34,4 +35,16 @@ public class CursoServiceImpl implements CursoSevice {
         return cursoRepository.save(novoCurso);
     }
 
+    @Override
+    public void concluirCursoPorId(Integer id_curso) {
+        validarCurso(id_curso);
+        Curso curso = cursoRepository.getById(id_curso);
+        curso.setProcesso(Processo.CONCLUIDO);
+        cursoRepository.save(curso);
+    }
+
+    private void validarCurso(Integer id_curso) {
+        cursoRepository.findById(id_curso)
+                .orElseThrow(() -> new ExceptionPersonalizada("mensagem", "Curso não encontrado."));
+    }
 }

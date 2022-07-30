@@ -7,10 +7,7 @@ import com.gerenciamento.curso.curso.model.Curso;
 import com.gerenciamento.curso.curso.service.impl.CursoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/curso")
@@ -27,5 +24,11 @@ public class CursoController {
     public ResponseEntity<CursoResponseDTO> cadastrarCurso(@RequestBody CursoRequestDTO dto) {
         Curso curso = cursoService.cadastrarCurso(cursoMapper.toCurso(dto), dto.getQuantidadeDiasConcluir());
         return ResponseEntity.ok().body(cursoMapper.toCursoResponseDTO(curso));
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity concluirCurso(@PathVariable Integer id) {
+        cursoService.concluirCursoPorId(id);
+        return ResponseEntity.ok().build();
     }
 }
