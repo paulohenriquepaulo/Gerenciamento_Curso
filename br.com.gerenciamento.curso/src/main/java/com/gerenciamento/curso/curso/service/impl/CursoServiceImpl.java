@@ -77,6 +77,12 @@ public class CursoServiceImpl implements CursoSevice {
     }
 
     @Override
+    public void deletarTodosCursoAluno(Integer id_aluno) {
+        List<Curso> cursoList = cursoRepository.findByIdAluno(id_aluno);
+        cursoRepository.deleteAll(cursoList);
+    }
+
+    @Override
     public Curso atualizarCurso(Curso curso, Integer dias) {
         validarCurso(curso.getId());
         Curso cursoAtualizado = cursoRepository.getById(curso.getId());
