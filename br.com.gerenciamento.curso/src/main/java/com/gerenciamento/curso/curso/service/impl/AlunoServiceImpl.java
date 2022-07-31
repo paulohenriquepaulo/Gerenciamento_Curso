@@ -47,7 +47,8 @@ public class AlunoServiceImpl implements AlunoService {
     @Override
     public void deletarAlunoPoID(Integer id) {
         validarAlunoPorID(id);
-        verificarAlunoVinculadoCurso(id);
+        String email = buscarAlunoPorID(id).getEmail();
+        verificarAlunoPodeSerDeletado(id, email);
         alunoRepository.deleteById(id);
     }
 
@@ -84,9 +85,11 @@ public class AlunoServiceImpl implements AlunoService {
                 .orElseThrow(() -> new ExceptionPersonalizada("mensagem", "Aluno não cadastrado."));
     }
 
-    public void verificarAlunoVinculadoCurso(Integer id_aluno) {
+    public void verificarAlunoPodeSerDeletado(Integer id_aluno, String email) {
             if (!cursoRepository.findByIdAluno(id_aluno).isEmpty()) {
-                throw new ExceptionPersonalizada("mensagem", "Este aluno está vinculado a um ou mais cursos.");
+                throw new ExceptionPersonalizada("mensagem", "Este aluno não pode ser excluido, está vinculado a um ou mais cursos.");
+            } else if (alunoRepository.existsByEmail(email)) {
+                throw new ExceptionPersonalizada("mensagem", "Este aluno não pode ser excluido, está vinculado a um ou mais acompanhamento");
             }
     }
 }
