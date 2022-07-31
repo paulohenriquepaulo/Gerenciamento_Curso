@@ -1,15 +1,15 @@
-package com.gerenciamento.curso.curso.model;
+package com.gerenciamento.curso.curso.dto;
 
 import com.gerenciamento.curso.curso.model.enums.DiaDaSemana;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
-public class Acompanhamento {
+public class AcompanhamentoResquestDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @NotEmpty(message = "O E-mail do aluno não pode ser nulo.")
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private DiaDaSemana diaDaSemana;
@@ -26,16 +26,12 @@ public class Acompanhamento {
 
     private String comentario;
 
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
-
-    public Integer getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public DiaDaSemana getDiaDaSemana() {
@@ -92,13 +88,5 @@ public class Acompanhamento {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
-    }
-
-    public Aluno getAluno() {
-        return aluno;
-    }
-
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
     }
 }

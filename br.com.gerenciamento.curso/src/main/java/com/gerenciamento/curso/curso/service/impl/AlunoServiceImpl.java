@@ -27,6 +27,7 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno cadastrarAluno(Aluno aluno) {
+        validarEmail(aluno.getEmail());
         return alunoRepository.save(aluno);
     }
 
@@ -62,6 +63,19 @@ public class AlunoServiceImpl implements AlunoService {
             if (!alunoRepository.existsById(id)) {
                 throw new ExceptionPersonalizada("mensagem", "Aluno não cadastrado");
             }
+        }
+    }
+
+    public Aluno buscarAlunoPorEmail(String email) {
+        if (!alunoRepository.existsByEmail(email)) {
+            throw new ExceptionPersonalizada("mensagem", "Não existe Aluno cadastrado com este e-mail.");
+        }
+        return alunoRepository.findByEmail(email);
+
+    }
+    private void validarEmail(String email){
+        if (alunoRepository.existsByEmail(email)) {
+            throw new ExceptionPersonalizada("mensagem", "E-mail já cadastrado.");
         }
     }
 
