@@ -3,9 +3,6 @@ package com.gerenciamento.curso.curso.dto.curso;
 import com.gerenciamento.curso.curso.model.Aluno;
 import com.gerenciamento.curso.curso.model.enums.Processo;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class CursoResponseDTO {

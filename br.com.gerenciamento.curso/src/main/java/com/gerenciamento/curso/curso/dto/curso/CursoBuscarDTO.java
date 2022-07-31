@@ -8,7 +8,6 @@ public class CursoBuscarDTO {
 
     private Integer id_aluno;
 
-
     public Integer getId_curso() {
         return id_curso;
     }

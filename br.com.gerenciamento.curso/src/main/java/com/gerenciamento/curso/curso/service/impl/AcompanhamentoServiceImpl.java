@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class AcompanhamentoServiceImpl implements AcompanhamentoService {
 
     @Autowired
-    private AcompanhamentoRepository  acompanhamentoRepository;
+    private AcompanhamentoRepository acompanhamentoRepository;
 
     @Autowired
     private AlunoServiceImpl alunoService;

@@ -13,7 +13,6 @@ public class CursoRequestDTO {
 
     private Integer quantidadeDiasConcluir;
 
-
     private Integer id_aluno;
 
     public String getNomeCurso() {
@@ -27,6 +26,7 @@ public class CursoRequestDTO {
     public Integer getCargaHoraria() {
         return cargaHoraria;
     }
+
     public void setCargaHoraria(Integer cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }

@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CursoRepository extends JpaRepository<Curso,Integer> {
+public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
     @Query("SELECT c FROM Curso c WHERE id_aluno = :id_aluno")
     List<Curso> findByIdAluno(@Param("id_aluno") Integer id_aluno);

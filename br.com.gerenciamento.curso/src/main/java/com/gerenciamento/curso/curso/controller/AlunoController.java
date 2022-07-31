@@ -38,8 +38,8 @@ public class AlunoController {
     }
 
     @PutMapping
-    public ResponseEntity<AlunoResponseDTO> atualizarAluno(@RequestBody @Valid AlunoAtualizarDTO dto ) {
-        Aluno alunoAtualizado  = alunoService.atualizarAluno(alunoMapper.toAluno(dto));
+    public ResponseEntity<AlunoResponseDTO> atualizarAluno(@RequestBody @Valid AlunoAtualizarDTO dto) {
+        Aluno alunoAtualizado = alunoService.atualizarAluno(alunoMapper.toAluno(dto));
         return ResponseEntity.ok(alunoMapper.toAlunoResponseDTO(alunoAtualizado));
     }
 

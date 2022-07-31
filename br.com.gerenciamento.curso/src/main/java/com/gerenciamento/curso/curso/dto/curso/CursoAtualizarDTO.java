@@ -8,7 +8,7 @@ public class CursoAtualizarDTO {
 
     private String nomeCurso;
 
-        private Integer quantidadeDiasConcluir;
+    private Integer quantidadeDiasConcluir;
 
     public Integer getCargaHoraria() {
         return cargaHoraria;

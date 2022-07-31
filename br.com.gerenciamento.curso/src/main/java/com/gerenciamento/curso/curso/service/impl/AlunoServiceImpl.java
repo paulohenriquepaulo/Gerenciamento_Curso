@@ -74,7 +74,8 @@ public class AlunoServiceImpl implements AlunoService {
         return alunoRepository.findByEmail(email);
 
     }
-    private void validarEmail(String email){
+
+    private void validarEmail(String email) {
         if (alunoRepository.existsByEmail(email)) {
             throw new ExceptionPersonalizada("mensagem", "E-mail já cadastrado.");
         }
@@ -86,10 +87,10 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     public void verificarAlunoPodeSerDeletado(Integer id_aluno, String email) {
-            if (!cursoRepository.findByIdAluno(id_aluno).isEmpty()) {
-                throw new ExceptionPersonalizada("mensagem", "Este aluno não pode ser excluido, está vinculado a um ou mais cursos.");
-            } else if (alunoRepository.existsByEmail(email)) {
-                throw new ExceptionPersonalizada("mensagem", "Este aluno não pode ser excluido, está vinculado a um ou mais acompanhamento");
-            }
+        if (!cursoRepository.findByIdAluno(id_aluno).isEmpty()) {
+            throw new ExceptionPersonalizada("mensagem", "Este aluno não pode ser excluido, está vinculado a um ou mais cursos.");
+        } else if (alunoRepository.existsByEmail(email)) {
+            throw new ExceptionPersonalizada("mensagem", "Este aluno não pode ser excluido, está vinculado a um ou mais acompanhamento");
+        }
     }
 }
