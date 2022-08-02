@@ -9,7 +9,9 @@ import com.gerenciamento.curso.curso.service.AcompanhamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class AcompanhamentoServiceImpl implements AcompanhamentoService {
@@ -33,6 +35,12 @@ public class AcompanhamentoServiceImpl implements AcompanhamentoService {
         acompanhamento.setTeveAtividadePratica(dto.getTeveAtividadePratica().toUpperCase());
         acompanhamento.setDiaDaSemana(validarDiaDaSemana(dto.getDiaDaSemana()));
         return acompanhamentoRepository.save(acompanhamento);
+    }
+
+    @Override
+    public List<Acompanhamento> buscarAcompanhamentoDaSemanaDoAluno(String email) {
+        List<Acompanhamento> acompanhamentos = acompanhamentoRepository.findAllByIdLimite(alunoService.buscarAlunoPorEmail(email).getId());
+        return acompanhamentos;
     }
 
     private DiaDaSemana validarDiaDaSemana(DiaDaSemana diaDaSemana) {
