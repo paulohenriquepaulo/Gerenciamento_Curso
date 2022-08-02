@@ -1,5 +1,6 @@
 package com.gerenciamento.curso.curso.service.impl;
 
+import com.gerenciamento.curso.curso.dto.curso.CursoRequestDTO;
 import com.gerenciamento.curso.curso.exeption.ExceptionPersonalizada;
 import com.gerenciamento.curso.curso.mapper.CursoMapper;
 import com.gerenciamento.curso.curso.model.Aluno;
@@ -29,12 +30,16 @@ public class CursoServiceImpl implements CursoSevice {
     private AlunoServiceImpl alunoService;
 
     @Override
-    public Curso cadastrarCurso(Curso curso, Integer dias) {
-        Curso novoCurso = cursoMapper.toCurso(curso);
-        Aluno aluno = alunoService.buscarAlunoPorID(curso.getAluno().getId());
+    public Curso cadastrarCurso(CursoRequestDTO dto) {
+        Curso novoCurso = cursoMapper.toCurso(dto);
+        Aluno aluno = alunoService.buscarAlunoPorEmail(dto.getEmail());
+        alunoService.validarAlunoPorID(dto.getId_aluno());
+        if (aluno.getId() != dto.getId_aluno()) {
+            throw new ExceptionPersonalizada("mensagem", "O Id informado não é do(a) aluno(a): " + aluno.getNome());
+        }
         novoCurso.setAluno(aluno);
         novoCurso.setProcesso(Processo.ANDAMENTO);
-        novoCurso.setPrevisaoConclusao(LocalDate.now().plusDays(dias));
+        novoCurso.setPrevisaoConclusao(LocalDate.now().plusDays(dto.getQuantidadeDiasConcluir()));
         novoCurso.setDataInicio(LocalDate.now());
         return cursoRepository.save(novoCurso);
     }

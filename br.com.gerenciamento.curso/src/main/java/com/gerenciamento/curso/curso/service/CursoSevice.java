@@ -1,12 +1,13 @@
 package com.gerenciamento.curso.curso.service;
 
+import com.gerenciamento.curso.curso.dto.curso.CursoRequestDTO;
 import com.gerenciamento.curso.curso.model.Curso;
 
 import java.util.List;
 
 public interface CursoSevice {
 
-    Curso cadastrarCurso(Curso curso, Integer dias);
+    Curso cadastrarCurso(CursoRequestDTO dto);
 
     void concluirCursoPorId(Integer id_curso);
 

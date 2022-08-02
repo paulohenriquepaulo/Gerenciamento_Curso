@@ -27,7 +27,7 @@ public class CursoController {
 
     @PostMapping
     public ResponseEntity<CursoResponseDTO> cadastrarCurso(@RequestBody CursoRequestDTO dto) {
-        Curso curso = cursoService.cadastrarCurso(cursoMapper.toCurso(dto), dto.getQuantidadeDiasConcluir());
+        Curso curso = cursoService.cadastrarCurso(dto);
         return ResponseEntity.ok().body(cursoMapper.toCursoResponseDTO(curso));
     }
 

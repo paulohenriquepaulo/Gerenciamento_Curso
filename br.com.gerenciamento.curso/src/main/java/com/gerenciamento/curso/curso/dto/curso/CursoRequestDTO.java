@@ -15,6 +15,8 @@ public class CursoRequestDTO {
 
     private Integer id_aluno;
 
+    private String email;
+
     public String getNomeCurso() {
         return nomeCurso;
     }
@@ -47,4 +49,11 @@ public class CursoRequestDTO {
         this.id_aluno = id_aluno;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
